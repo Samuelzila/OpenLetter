@@ -17,7 +17,6 @@ In order to run the webserver, you will need:
   <li>MySQL (make sure pdo_mysql is enabled in php.ini)</li>
   <li>Even if not necessary, I recomend phpmyadmin</li>
 </ul>
-Coded and tested on ubuntu 20.4
-
+Coded and tested on ubuntu 20.4<br><br>
 here is how you should be able to install all dependencies using the apt package manager on linux:<br>
-code(sudo apt-get update && sudo apt-get install apache2 php mysql-server phpmyadmin)
+`code(sudo apt-get update && sudo apt-get install apache2 php mysql-server phpmyadmin`
