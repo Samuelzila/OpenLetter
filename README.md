@@ -1,2 +1,3 @@
-# OpenLetter
-Probably ambitious, but our ultimate goal would be to make an open source social media to replace them all, that would not store any unnecessary data and would not spy on you.
+# What is OpenLetter
+OpenLetter the project of a completely private social media, with end-to-end encryption and that would not collect any unnecessary data.
+The privacy settings, unlike many other social medias, would be on by default.
