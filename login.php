@@ -7,8 +7,13 @@ function cookieCreate(){
 }
 
 //already logged in ?
-if (isset($_COOKIE['mail']) && isset($_COOKIE['password'])){
+if (isset($_COOKIE['mail']) && isset($_COOKIE['password'])) {
 	$userexist = $conn->query("SELECT COUNT(*) FROM user WHERE mail = '".$_COOKIE['mail']."' AND password = '".$_COOKIE['password']."'")->fetchColumn();
+	if ($userexist == 1) {
+		header('Location: index.php');
+	}
+}elseif (isset($_SESSION['mail']) && isset($_SESSION['password'])) {
+	$userexist = $conn->query("SELECT COUNT(*) FROM user WHERE mail = '".$_SESSION['mail']."' AND password = '".$_SESSION['password']."'")->fetchColumn();
 	if ($userexist == 1) {
 		header('Location: index.php');
 	}
@@ -17,11 +22,11 @@ if (isset($_COOKIE['mail']) && isset($_COOKIE['password'])){
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Log In</title>
 </head>
 <body>
 login
-<form method="post" action="login.php">
+<form method="post">
 	<input type="text" name="mail" placeholder="e-mail">
 	<input type="password" name="password" placeholder="Password">
 	<input type="submit" name="submit" value="Log in">
@@ -41,9 +46,10 @@ if (isset($_POST['submit'])) {
 			}
 			header('Location: index.php');
 		}else{echo 'Wrong e-mail or password.';}
-	}else{echo "please fill all entries";}
+	}else{echo "Please fill all entries.";}
 }
 ?>
 </form>
+<a href="signin.php">»Sign In«</a>
 </body>
 </html>

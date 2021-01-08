@@ -1,7 +1,5 @@
 <?php
-include 'connexion.php';
-include 'header.php';
-//isRegistered
+//isLoggedIn
 if (isset($_COOKIE['mail']) && isset($_COOKIE['password'])) {
 	$isRegistered = $conn->query("SELECT COUNT(*) FROM user WHERE mail = '".$_COOKIE['mail']."' AND password = '".$_COOKIE['password']."'")->fetchColumn();
 	if ($isRegistered == 0) {
@@ -14,13 +12,22 @@ if (isset($_COOKIE['mail']) && isset($_COOKIE['password'])) {
 	}
 }else{header('Location: login.php');}
 
+//Log Out
+if (isset($_POST['logout'])) {
+	session_unset();
+	session_destroy();
+	setcookie('mail','unsetting',time()-1);
+	setcookie('password','unsetting',time()-1);
+	header('Location: login.php');
+}
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Home</title>
+	<title></title>
 </head>
 <body>
-index
+<!--Log Out button-->
+<form method="post"><input type="submit" name="logout" value="Log Out"></form>
 </body>
 </html>
