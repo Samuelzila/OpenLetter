@@ -20,3 +20,16 @@ Coded and tested on ubuntu 20.04
 
 here is how you should be able to install all dependencies using the apt package manager on linux:<br>
 `sudo apt-get update && sudo apt-get install apache2 php mysql-server phpmyadmin`
+
+### Progress ###
+* [ ] Profile management
+* [ ] End-to-end encryption
+* [ ] Messaging system
+  * [ ] text
+  * [ ] images
+  * [ ] videos ?
+* [ ] Publish things for all people who follow you to see
+  * [ ] Wall
+  * [ ] Stories
+* [ ] Voice chat ? <br>
+...and probably more
