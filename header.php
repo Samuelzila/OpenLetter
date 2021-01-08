@@ -24,7 +24,6 @@ if (isset($_POST['logout'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
 </head>
 <body>
 <!--Log Out button-->

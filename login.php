@@ -2,8 +2,8 @@
 include 'connexion.php';
 
 function cookieCreate(){
-	setcookie('mail',$_POST['mail'], time() + 86400 *30);
-	setcookie('password',$_POST['password'], time() + 86400 *30);
+	setcookie('mail',strtolower($_POST['mail']), time() + 86400 *30);
+	setcookie('password',md5($_POST['password']), time() + 86400 *30);
 }
 
 //already logged in ?
@@ -18,6 +18,12 @@ if (isset($_COOKIE['mail']) && isset($_COOKIE['password'])) {
 		header('Location: index.php');
 	}
 }
+
+//Create session variables
+$password = md5(htmlspecialchars($_POST['password']));
+$mail = htmlspecialchars(strtolower($_POST['mail']));
+
+$_SESSION['formmail'] = $mail;
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,7 +33,7 @@ if (isset($_COOKIE['mail']) && isset($_COOKIE['password'])) {
 <body>
 login
 <form method="post">
-	<input type="text" name="mail" placeholder="e-mail">
+	<input type="text" name="mail" placeholder="e-mail" value="<?php if(isset($_SESSION['formmail'])){echo $_SESSION['formmail'];} ?>">
 	<input type="password" name="password" placeholder="Password">
 	<input type="submit" name="submit" value="Log in">
 	<input type="checkbox" name="remember">
@@ -36,13 +42,14 @@ login
 //Log in
 if (isset($_POST['submit'])) {
 	if (!empty($_POST['mail']) && !empty($_POST['password'])) {
-		$userexist = $conn->query("SELECT COUNT(*) FROM user WHERE mail = '".$_POST['mail']."' AND password = '".$_POST['password']."'")->fetchColumn();
+		
+		$userexist = $conn->query("SELECT COUNT(*) FROM user WHERE mail = '".$mail."' AND password = '".$password."'")->fetchColumn();
 		if ($userexist == 1) {
 			if (isset($_POST['remember'])){
 				cookieCreate();
 			}else{
-				$_SESSION['mail'] = $_POST['mail'];
-				$_SESSION['password'] = $_POST['password'];
+				$_SESSION['mail'] = $mail;
+				$_SESSION['password'] = $password;
 			}
 			header('Location: index.php');
 		}else{echo 'Wrong e-mail or password.';}
